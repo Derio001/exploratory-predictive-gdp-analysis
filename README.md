@@ -1,150 +1,167 @@
-# GDP Prediction using Machine Learning and Business Intelligence
+# 🌍 Global GDP Intelligence: Predictive Analytics & Business Intelligence Dashboard
 
-## Overview
+[![Python](https://img.shields.io/badge/Python-3.8+-blue)](https://www.python.org/)
+[![Power BI](https://img.shields.io/badge/Dashboard-Power%20BI-F2C811?logo=powerbi)](https://powerbi.microsoft.com/)
+[![Data](https://img.shields.io/badge/Source-World%20Bank-009688)](https://data.worldbank.org/)
+[![Models](https://img.shields.io/badge/ML-Random%20Forest%20%7C%20Decision%20Tree-orange)](https://scikit-learn.org/)
+[![Status](https://img.shields.io/badge/Status-Complete-brightgreen)]()
 
-This project develops a data-driven framework for analyzing and predicting Gross Domestic Product (GDP) using macroeconomic indicators. The system integrates real-world economic data from the World Bank with Business Intelligence dashboards and machine learning models to explore economic patterns and generate predictive insights.
-
-The project combines data visualization and predictive analytics to provide a comprehensive view of global economic performance.
-
----
-
-## Objectives
-
-- Analyze GDP trends using Business Intelligence dashboards.
-- Explore relationships between GDP and macroeconomic indicators.
-- Develop machine learning models to predict GDP values.
-- Provide interactive dashboards for economic data exploration.
-- Demonstrate the use of data analytics in economic forecasting.
+> A full-stack economic intelligence system — integrating 7 World Bank macroeconomic datasets,
+> building ML regression models to predict GDP, and delivering a 4-page interactive Power BI
+> dashboard for global and country-level economic analysis.
 
 ---
 
-## Dataset
+## 📊 Dashboard Preview
 
-The dataset used in this project is obtained from:
+### Page 1 — GDP Overview
+- 🗺️ **World map** — GDP by country (filled choropleth)
+- 📈 **GDP trend lines** — Top economies 2000–2024
+- 🔢 **KPI cards** — Total global GDP, world population, country count
+- 🎛️ **Year range slicer** — filter all visuals dynamically
 
-**World Bank Open Data**  
-https://data.worldbank.org/
+### Page 2 — Macroeconomic Indicators
+- 📉 Exports vs Imports scatter chart
+- 🏦 Top countries by FDI Inflows (bar chart)
+- 📊 Inflation trends over time (line chart)
+- 🌐 Country slicer for filtered analysis
 
-### Key Variables
+### Page 3 — Model Results
+- 🎯 Feature importance ranking (Random Forest)
+- 🔵 Actual vs Predicted GDP — Random Forest
+- 🔴 Actual vs Predicted GDP — Decision Tree
+- 📊 R² score comparison chart
 
-- GDP
-- Population
-- Inflation
-- Imports
-- Exports
-- Country
-- Year
-
-These variables were selected to study the relationship between economic indicators and GDP growth.
-
----
-
-## System Architecture
-
-The system follows a data analytics pipeline:
-
-1. Data Collection  
-2. Data Cleaning and Preprocessing  
-3. Data Modeling (Star Schema)  
-4. Business Intelligence Dashboard Development  
-5. Machine Learning Model Training  
-6. GDP Prediction and Analysis  
+### Page 4 — Country Deep Dive
+- 🔍 Country selector with full KPI panel
+- 📈 GDP growth trajectory over time
+- 📋 Detailed data table with all indicators
 
 ---
 
-## Data Model
-
-A **Star Schema** was implemented to organize the dataset for efficient analysis.
-
-### Fact Table
-
-**Fact_GDP**
-
-- GDP  
-- Population  
-- Inflation  
-- Imports  
-- Exports  
-
-### Dimension Tables
-
-- Dim_Country  
-- Dim_Time  
-
-This structure enables multidimensional analysis across countries and time periods.
+## 🏗️ Architecture
+```
+7 World Bank Excel Files (GDP, Exports, Imports, FDI, Inflation, Population, Govt Expenditure)
+    ↓
+Python Pipeline (pandas) — Melt wide→long, merge on Country+Year, clean missing values
+    ↓
+EDA — Correlation heatmap, scatter plots, distribution analysis, top economy trends
+    ↓
+Feature Selection — Random Forest importance ranking
+    ↓
+ML Models — Decision Tree & Random Forest Regressor (80/20 split)
+    ↓
+Evaluation — MAE, RMSE, R² | Residual analysis
+    ↓
+Export — PowerBI_GDP_Main.xlsx + Predictions + Feature Importance
+    ↓
+Power BI Dashboard — 4 interactive pages
+```
 
 ---
 
-## Dashboards
+## 📁 Dataset
 
-The Power BI report contains four interactive dashboards:
+- **Source**: [World Bank Open Data](https://data.worldbank.org/)
+- **Coverage**: 180+ countries | 2000–2024
+- **Indicators integrated**:
 
-### 1. GDP Overview
-Provides a high-level summary of global GDP trends across different years.
-
-### 2. Macroeconomic Indicators
-Analyzes relationships between GDP and macroeconomic variables such as population and inflation.
-
-### 3. Model Results
-Displays the performance of machine learning models used for GDP prediction.
-
-### 4. Country Deep Dive
-Allows detailed analysis of GDP and economic indicators for individual countries.
-
----
-
-## Machine Learning Models
-
-The project uses regression-based machine learning models for GDP prediction.
-
-### Models Implemented
-
-- Decision Tree Regression
-- Random Forest Regression
-
-These models were trained using macroeconomic indicators to estimate GDP values.
+| File | Indicator | Role |
+|------|-----------|------|
+| GDP.xls | GDP (current US$) | **Target variable** |
+| Export.xls | Exports of goods & services | Feature |
+| Imports.xls | Imports of goods & services | Feature |
+| FDI inflows.xls | Foreign Direct Investment net inflows | Feature |
+| Inflation.xls | Consumer Price Index | Feature |
+| Population.xls | Total population | Feature |
+| Goverment_Expenditure.xls | General government expenditure | Feature |
 
 ---
 
-## Model Evaluation Metrics
+## 🤖 Machine Learning Results
 
-The models were evaluated using standard regression metrics:
+| Metric | Decision Tree | Random Forest |
+|--------|--------------|---------------|
+| MAE | Higher | ✅ Lower |
+| RMSE | Higher | ✅ Lower |
+| R² Score | Good | ✅ Better |
+| **Winner** | | ✅ **Random Forest** |
 
-- Mean Absolute Error (MAE)
-- Mean Squared Error (MSE)
-- Root Mean Squared Error (RMSE)
-- R² Score
-
-Random Forest Regression produced more stable and accurate predictions.
-
----
-
-## Tools and Technologies
-
-- Python
-- Pandas
-- Scikit-learn
-- Power BI
-- Jupyter Notebook
-- World Bank Open Data
+**Key finding**: Population and Government Expenditure rank as the top GDP predictors globally,
+with ensemble methods (Random Forest) significantly outperforming single-tree models by
+reducing variance across the high-dimensional cross-country dataset.
 
 ---
 
-## Key Insights
+## 🚀 How to Run
 
-- Global GDP shows a long-term upward growth trend.
-- Macroeconomic indicators influence GDP performance.
-- Population and trade activity show strong relationships with economic growth.
-- Machine learning models can effectively predict GDP trends.
+### Python Pipeline
+```bash
+# Clone
+git clone https://github.com/Derio001/exploratory-predictive-gdp-analysis.git
+cd exploratory-predictive-gdp-analysis
+
+# Install dependencies
+pip install pandas numpy matplotlib seaborn scikit-learn openpyxl xlrd
+
+# Run the notebook
+jupyter notebook Project_Implementation.ipynb
+```
+
+### Power BI Dashboard
+1. Download [Power BI Desktop](https://powerbi.microsoft.com/desktop/) (free)
+2. Open `powerbi_implementation.pbix`
+3. If prompted, re-link the data source to your local `PowerBI_GDP_Main.xlsx`
 
 ---
 
-## Future Scope
-
-- Integrate additional economic indicators such as unemployment and investment data.
-- Apply advanced regression techniques like Gradient Boosting or XGBoost.
-- Extend the dataset using longer historical economic data.
-- Develop automated forecasting pipelines for continuous economic monitoring.
+## 📁 Project Structure
+```
+exploratory-predictive-gdp-analysis/
+│
+├── Project_Implementation.ipynb      # Full Python pipeline (78 cells)
+├── powerbi_implementation.pbix       # 4-page Power BI dashboard
+│
+├── data/
+│   ├── Global GDP and Macroeconomic Indicators Dataset/
+│   │   ├── GDP.xls
+│   │   ├── Export.xls
+│   │   ├── Imports.xls
+│   │   ├── FDI inflows.xls
+│   │   ├── Inflation.xls
+│   │   ├── Population.xls
+│   │   └── Goverment_Expenditure.xls
+│   │
+│   ├── Integrated_GDP_Dataset.csv          # Cleaned unified dataset
+│   ├── PowerBI_GDP_Main.xlsx               # Main Power BI data source
+│   ├── PowerBI_Predictions.csv            # Actual vs predicted GDP
+│   └── PowerBI_Feature_Importance.csv     # Feature rankings
+│
+└── README.md
+```
 
 ---
 
+## 🔭 Future Work
+
+- [ ] Add Sub-Saharan Africa focused lens (Chad, Niger, Mali, Sudan deep dive)
+- [ ] Incorporate conflict/fragility index as a feature for Sahel economies
+- [ ] Time-series forecasting (ARIMA / LSTM) for multi-year GDP projection
+- [ ] Live World Bank API integration for automatic data refresh
+- [ ] Streamlit web app version for browser-based access
+
+---
+
+## 👤 Author
+
+**Mahamat Hanga Derio**
+M.Tech Data Science — Christ University, Bangalore
+Chadian national | Building economic intelligence tools for Sub-Saharan Africa
+
+📬 Open to collaboration with development banks, economic research institutions & policy organizations
+🔗 [GitHub](https://github.com/Derio001) | [LRI Child Health Project →](https://github.com/Derio001/lri-prediction-chad)
+
+---
+
+*Part of a portfolio focused on data-driven economic and public health analysis
+for the Lake Chad Basin and Sub-Saharan Africa.*
